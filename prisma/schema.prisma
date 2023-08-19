@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  email         String?    @unique
+  email         String?   @unique
   password      String?
   name          String?
   avatar        String?
@@ -23,6 +23,7 @@ model User {
   image         String?
 
   orders Order[]
+  Book   Book[]
 }
 
 model Book {
@@ -33,13 +34,13 @@ model Book {
   price       Int
   imageUrl    String
   rating      Float?
-  images      String[]
   category    String
   stock       Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  userId      String   @db.ObjectId
 
-  userId String? @db.ObjectId
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Order {
