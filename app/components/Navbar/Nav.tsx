@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
             <Link href="/" className='purple_gradient font-extrabold leading-[1.15] text-black text-2xl'>ReadR.</Link>
             <div className='relative'>
                 <div className='flex flex-row items-center gap-3'>
-                    <Link href='/search' className='text-bold border-2 border-neutral-200 px-3 py-1 mr-4 rounded-lg cursor-pointer' >
+                    <Link href='/search' className='text-bold border-2 border-neutral-200 px-3 py-1 mr-2 rounded-lg cursor-pointer' >
                         Search
                     </Link>
 
@@ -43,11 +43,14 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
                                         <div className='px-4 py-3 hover:bg-neutral-300 transition font-semibold cursor-pointer' onClick={() => router.push('/profile')}>Hello, {currentUser.name}</div>
                                         <div className='px-4 py-3 hover:bg-neutral-300 transition font-semibold cursor-pointer' onClick={() => router.push('/addBook')}>Add a Book</div>
                                         <div className='px-4 py-3 hover:bg-neutral-300 transition font-semibold cursor-pointer' onClick={() => router.push('/mybooks')}>My Books</div>
+                                        <div className='px-4 py-3 hover:bg-neutral-300 transition font-semibold cursor-pointer' onClick={() => router.push('/cart')}>My Cart</div>
+                                        <div className='px-4 py-3 hover:bg-neutral-300 transition font-semibold cursor-pointer' onClick={() => router.push('/books')}>All Books</div>
                                         <div className='px-4 py-3 hover:bg-neutral-300 transition font-semibold cursor-pointer' onClick={() => signOut()}>Sign Out</div>
                                     </>
 
                                 ) : (
                                     <>
+                                        <div className='px-4 py-3 hover:bg-neutral-300 transition font-semibold cursor-pointer' onClick={() => router.push('/books')}>All Books</div>
                                         <div className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer' onClick={() => router.push('/login')}>Login</div>
                                         <div className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer' onClick={() => router.push('/register')}>SignUp</div>
                                     </>

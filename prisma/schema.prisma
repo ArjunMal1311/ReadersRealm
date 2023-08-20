@@ -22,6 +22,8 @@ model User {
   updatedAt     DateTime  @updatedAt
   image         String?
 
+  cartItems Json[] @default([])
+
   orders Order[]
   Book   Book[]
 }
