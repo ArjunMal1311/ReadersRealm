@@ -5,7 +5,7 @@ import axios from 'axios';
 import Card from '../components/Card';
 import { GetServerSidePropsContext } from 'next';
 import { bookCategories } from '../components/ItemsList/CategoriesList';
-
+import { Range } from 'react-range';
 
 const Page = () => {
     const [listing, setListing] = useState<[]>([]);
@@ -14,8 +14,8 @@ const Page = () => {
         author: '',
         price: '',
         category: '',
-        minPrice: '',
-        maxPrice: ''
+        minPrice: 0,
+        maxPrice: 2000
     });
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -46,59 +46,74 @@ const Page = () => {
         setSearchParams({ ...searchParams, category: e.target.value });
     };
 
+    const handlePriceChange = (values) => {
+        setSearchParams({
+            ...searchParams,
+            minPrice: values[0],
+            maxPrice: values[1],
+        });
+    };
+
     return (
-        <div className='m-4'>
-            <div className='flex justify-center'>
-                <form onSubmit={handleSubmit}>
+        <div className='flex m-4'>
+            <div className='w-[10vw]'>
+                <form onSubmit={handleSubmit} className='space-y-4 flex flex-col border-2'>
                     <input
-                        type="text"
-                        className="flex-1 p-1 mr-2 rounded-lg focus:border-none"
-                        placeholder="Title"
+                        type='text'
+                        className='p-2 m-2 rounded-lg focus:outline-none'
+                        placeholder='Title'
                         value={searchParams.title}
-                        onChange={(e) => setSearchParams({ ...searchParams, title: e.target.value })}
+                        onChange={(e) =>
+                            setSearchParams({ ...searchParams, title: e.target.value })
+                        }
                     />
                     <input
-                        type="text"
-                        className="flex-1 p-1 mr-2 rounded-lg focus:border-none"
-                        placeholder="Author"
+                        type='text'
+                        className='p-2 m-2 rounded-lg focus:outline-none'
+                        placeholder='Author'
                         value={searchParams.author}
-                        onChange={(e) => setSearchParams({ ...searchParams, author: e.target.value })}
+                        onChange={(e) =>
+                            setSearchParams({ ...searchParams, author: e.target.value })
+                        }
                     />
-                    <input
-                        type="text"
-                        className="flex-1 p-1 mr-2 rounded-lg focus:border-none"
-                        placeholder="Price"
-                        value={searchParams.price}
-                        onChange={(e) => setSearchParams({ ...searchParams, price: e.target.value })}
-                    />
+
                     <select
-                        className="flex-1 p-1 mr-2 rounded-lg focus:border-none"
+                        className='p-2 mx-1 my-2 rounded-lg focus:outline-none'
                         value={searchParams.category}
                         onChange={handleCategoryChange}
                     >
-                        <option value="" className="flex-1 p-1 mr-2 rounded-lg focus:border-none" disabled>Select a category</option>
+                        <option value='' disabled>
+                            Category
+                        </option>
                         {bookCategories.map((category, index) => (
                             <option key={index} value={category.label}>
                                 {category.label}
                             </option>
                         ))}
                     </select>
-                    <input
-                        type="text"
-                        className="flex-1 p-1 mr-2 rounded-lg focus:border-none"
-                        placeholder="Min Price"
-                        value={searchParams.minPrice}
-                        onChange={(e) => setSearchParams({ ...searchParams, minPrice: e.target.value })}
-                    />
-                    <input
-                        type="text"
-                        className="flex-1 p-1 mr-2 rounded-lg focus:border-none"
-                        placeholder="Max Price"
-                        value={searchParams.maxPrice}
-                        onChange={(e) => setSearchParams({ ...searchParams, maxPrice: e.target.value })}
-                    />
-                    <button type="submit">
+                    <div className='p-2 m-2 rounded-lg focus:outline-none'>
+                        <label >Price Range:</label>
+                        <Range
+                            step={100}
+                            min={0}
+                            max={2000}
+                            values={[searchParams.minPrice, searchParams.maxPrice]}
+                            onChange={handlePriceChange}
+                            renderTrack={({ props, children }) => (
+                                <div {...props} className='h-2 w-full bg-gray-300 rounded-md relative'>
+                                    {children}
+                                </div>
+                            )}
+                            renderThumb={({ props, value }) => (
+                                <div {...props} className='h-6 w-6 bg-blue-500 rounded-full shadow-md cursor-pointer transform -translate-x-1/2 -translate-y-2'>
+                                    <div className='text-white text-sm'>{value}</div>
+                                </div>
+                            )}
+                        />
+                    </div>
+                    <button type="submit" className='flex justify-center items-center border-2  border-black m-4 rounded-lg'>
                         <IoSearch className="text-gray-600 text-xl cursor-pointer" />
+                        Search
                     </button>
 
                 </form>
@@ -106,7 +121,7 @@ const Page = () => {
 
             {listing ? (
                 <div>
-                    <div className='mx-auto md:px-6 sm:px-2 mt-10'>
+                    <div className='mx-auto md:px-6 sm:px-2'>
                         <h4 className='purple_gradient text-4xl font-bold mb-5'>
                             Here are the results!
                         </h4>

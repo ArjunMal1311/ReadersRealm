@@ -128,9 +128,9 @@ const Page = () => {
                         </div>
                     )}
                     {step === STEPS.IMAGES && (
-                        <div className='h-[75vh]'>
-                            <Heading title="Step 3: Add Pictures!" />
-                            <ImageUpload onChange={(value) => setCustomValue('imageUrl', value)} value={imageSrc} />
+                        <div>
+                            <Heading title="Step 4: Add Pictures!" />
+                            <ImageUpload onChange={(value) => setCustomValue('imageSrc', value)} value={imageSrc} />
                         </div>
                     )}
                     {step === STEPS.DESCRIPTION && (
@@ -149,7 +149,7 @@ const Page = () => {
                                 <div className="mt-4">Price</div>
                                 <Input
                                     id="price"
-                                    label="Price per night (in ₹)"
+                                    label="Price (in ₹)"
                                     type="number"
                                     disabled={isLoading}
                                     register={register}

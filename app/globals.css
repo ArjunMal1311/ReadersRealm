@@ -56,3 +56,21 @@
     -webkit-text-stroke: 4px black;
   }
 }
+
+
+/* YourComponent.css */
+
+/* Styles for the slider track */
+.slider-track {
+  height: 4px;
+  background-color: #ccc; /* Set the desired background color */
+}
+
+/* Styles for the slider thumb */
+.slider-thumb {
+  width: 16px;
+  height: 16px;
+  background-color: #007bff; /* Set the desired thumb color */
+  border-radius: 50%;
+  cursor: pointer;
+}

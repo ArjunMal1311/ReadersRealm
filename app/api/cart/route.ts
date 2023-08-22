@@ -19,15 +19,31 @@ export async function PATCH(request: Request) {
 
 
     try {
-        const newCartItem = { id, quantity };
-        const updatedCartItems = [...currentUser.cartItems, newCartItem];
-        await prisma.user.update({
-            where: { id: currentUser.id },
-            data: { cartItems: { set: updatedCartItems } }, // Remove the additional array wrapper
-        });
+        const existingCartItemIndex = currentUser.cartItems.findIndex(item => item.id === id);
 
+        if (existingCartItemIndex !== -1) {
+            // Product already exists in cart, update the quantity
+            const updatedCartItems = [...currentUser.cartItems];
+            updatedCartItems[existingCartItemIndex].quantity = quantity;
 
-        return NextResponse.json({ message: "CartItem added successfully" });
+            await prisma.user.update({
+                where: { id: currentUser.id },
+                data: { cartItems: { set: updatedCartItems } },
+            });
+
+            return NextResponse.json({ message: "CartItem quantity updated successfully" });
+        } else {
+            // Product doesn't exist in cart, add a new cart item
+            const newCartItem = { id, quantity };
+            const updatedCartItems = [...currentUser.cartItems, newCartItem];
+
+            await prisma.user.update({
+                where: { id: currentUser.id },
+                data: { cartItems: { set: updatedCartItems } },
+            });
+
+            return NextResponse.json({ message: "CartItem added successfully" });
+        }
     } catch (error) {
         console.error("Error adding cart item:", error);
         return NextResponse.error();

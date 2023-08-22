@@ -6,7 +6,7 @@ const page = async () => {
     const book = await getAllBooks();
 
     return (
-        <div className='mx-auto md:px-6 sm:px-2 mt-10'>
+        <div className='md:px-6 sm:px-2 mt-10 mx-4'>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
                 {book.map((book: any) => (
                     <div className='flex-col' key={book.id}>

@@ -98,8 +98,6 @@ export default async function Home() {
           ))}
         </div>
       </div>
-
-      <div className='mx-4'>Hlello</div>
     </div >
   )
 }

@@ -17,17 +17,22 @@ const Card: React.FC<ListingCardProps> = ({ data, disabled, actionLabel, actionI
                 <Image
                     src={data.imageUrl}
                     alt="Listing"
-                    className="object-cover rounded-t-lg"
-                    width={200}
-                    height={100}
+                    className="object-cover h-48 w-full rounded-t-lg"
+                    width={500}
+                    height={500}
                 />
                 <div className="mt-4">
-                    
+
                     <p className="mt-1 font-semibold text-2xl">
                         {data.title.substring(0, 15)}
                     </p>
-                    <p className="mt-1 text-purple-700 font-semibold">
+                    <p className="mt-1 mb-2 text-md">
+                        {data.author}
+                    </p>
+                    <p className="mt-2 text-purple-700 font-semibold flex justify-between items-center">
                         ₹ {data.price}
+
+                        <button className='px-2 py-1 border-2 rounded-lg hover:bg-purple-500 hover:text-white'>Add to Cart</button>
                     </p>
                 </div>
             </Link>
