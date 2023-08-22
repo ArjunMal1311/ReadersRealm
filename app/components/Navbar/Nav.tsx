@@ -44,6 +44,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
                                         <div className='px-4 py-3 hover:bg-neutral-300 transition font-semibold cursor-pointer' onClick={() => router.push('/addBook')}>Add a Book</div>
                                         <div className='px-4 py-3 hover:bg-neutral-300 transition font-semibold cursor-pointer' onClick={() => router.push('/mybooks')}>My Books</div>
                                         <div className='px-4 py-3 hover:bg-neutral-300 transition font-semibold cursor-pointer' onClick={() => router.push('/cart')}>My Cart</div>
+                                        <div className='px-4 py-3 hover:bg-neutral-300 transition font-semibold cursor-pointer' onClick={() => router.push('/myorder')}>My Orders</div>
                                         <div className='px-4 py-3 hover:bg-neutral-300 transition font-semibold cursor-pointer' onClick={() => router.push('/books')}>All Books</div>
                                         <div className='px-4 py-3 hover:bg-neutral-300 transition font-semibold cursor-pointer' onClick={() => signOut()}>Sign Out</div>
                                     </>
