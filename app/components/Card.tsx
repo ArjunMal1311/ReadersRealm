@@ -1,7 +1,9 @@
+"use client"
 import React from 'react';
 import Image from 'next/image';
 import { SafeListing } from './types';
 import Link from 'next/link';
+import axios from 'axios';
 
 interface ListingCardProps {
     data: SafeListing;
@@ -11,6 +13,16 @@ interface ListingCardProps {
 }
 
 const Card: React.FC<ListingCardProps> = ({ data, disabled, actionLabel, actionId = '' }) => {
+    const AddCart = () => {
+        try {
+            axios.patch('/api/cart', {
+                id: data.id,
+                quantity: 1,
+            });
+        } catch (error) {
+            console.error("Error adding to cart:", error);
+        }
+    }
     return (
         <div className="hover:bg-purple-100 rounded-lg shadow-md p-4 transform hover:scale-105 transition cursor-pointer border-2 hover:border-purple-100">
             <Link href={`/books/${data.id}`}>
@@ -32,7 +44,7 @@ const Card: React.FC<ListingCardProps> = ({ data, disabled, actionLabel, actionI
                     <p className="mt-2 text-purple-700 font-semibold flex justify-between items-center">
                         ₹ {data.price}
 
-                        <button className='px-2 py-1 border-2 rounded-lg hover:bg-purple-500 hover:text-white'>Add to Cart</button>
+                        <button onClick={AddCart} className='px-2 py-1 border-2 rounded-lg hover:bg-purple-500 hover:text-white'>Add to Cart</button>
                     </p>
                 </div>
             </Link>

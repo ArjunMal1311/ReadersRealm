@@ -1,16 +1,17 @@
 import prisma from "@/app/libs/prismadb";
+import { getCurrentUser } from "./getCurrentUser";
 
-interface Params {
-    bookId?: string;
-}
+export default async function getUserReview() {
+    const user = await getCurrentUser();
 
-export default async function getReviews(params: Params) {
+    if (!user) {
+        return null;
+    }
+
     try {
-        const { bookId } = params;
-
         const review = await prisma.review.findMany({
             where: {
-                bookId: bookId
+                userId: user.id
             }
         });
 

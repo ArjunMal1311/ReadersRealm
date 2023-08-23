@@ -2,6 +2,7 @@ import React from 'react'
 import getAllOrders from '../actions/getAllOrders'
 import { getCurrentUser } from '../actions/getCurrentUser';
 import Link from 'next/link';
+import { SafeOrder } from '../components/types';
 
 const page = async () => {
     const data = await getAllOrders();
@@ -10,7 +11,7 @@ const page = async () => {
         <div className='ml-6 '>
             {user ? <>
                 <span className='text-4xl font-extrabold'>Hello, {user?.name}, Here are your orders!</span>
-                {data?.map((item) => (
+                {data?.map((item: SafeOrder) => (
                     <div key={item.id} className='flex mt-6'>
                         <Link href={`myorder/${item.id}`}>
                             <div className='border-2 border-black px-2 py-1 rounded-xl'>

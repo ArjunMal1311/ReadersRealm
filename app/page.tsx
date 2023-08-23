@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { bookCategories, rating } from './components/ItemsList/CategoriesList'
 import { AuthorsList } from './components/ItemsList/AuthorsList'
-import { FaFacebook, FaInstagram, FaSnapchat } from 'react-icons/fa'
+import { FaArrowDown, FaFacebook, FaInstagram, FaScroll, FaSnapchat } from 'react-icons/fa'
 import Link from "next/link"
 import getAllBooks from './actions/getAllBooks'
 import Card from './components/Card'
@@ -36,7 +36,8 @@ export default async function Home() {
 
         <div>
           <div className='mx-auto md:px-6 sm:px-2 mt-10'>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
+            <span className='text-2xl font-extrabold mb-4 ml-4'>TRENDING</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8 mt-4 m-2">
               {books.map((book: any) => (
                 <div className='flex-col' key={book.id}>
                   <Card
@@ -48,6 +49,13 @@ export default async function Home() {
             </div>
           </div>
         </div>
+
+
+        <div className='flex justify-center mt-10 text-2xl font-bold text-gray-200 flex-col items-center'>
+          <div>Scroll down to explore!</div>
+          <FaArrowDown />
+        </div>
+
       </div>
 
       <div className='h-screen'>
@@ -58,14 +66,14 @@ export default async function Home() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {bookCategories.slice(0, 6).map((book, index) => (
-            <div
+            <Link href={'/search'}
               key={index}
               className='bg-white p-4 m-4 rounded-lg border-2 border-gray-400 flex flex-col items-center hover:bg-black hover:text-white cursor-pointer'
             >
               <div className='text-2xl mb-2 hover:text-white'>{<book.icon />}</div>
               <h2 className='text-lg font-semibold '>{book.label}</h2>
               <p className='text-sm'>{book.description}</p>
-            </div>
+            </Link>
           ))}
         </div>
 
@@ -75,14 +83,14 @@ export default async function Home() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {AuthorsList.slice(0, 6).map((author, index) => (
-            <div
+            <Link href={'/search'}
               key={index}
               className="bg-white p-4 m-4 rounded-lg border-2 border-gray-400 flex flex-col hover:bg-black hover:text-white cursor-pointer"
             >
               <div className="text-xl mb-2 font-bold ">{author.name}</div>
               <p className="mb-2 ">{author.genres.join(", ")}</p>
               <p className="text-sm">{author.criteria}</p>
-            </div>
+            </Link>
           ))}
         </div>
 
@@ -90,13 +98,13 @@ export default async function Home() {
           <p className='mt-2 font-semibold text-xl'>Select a book based on rating!</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+        <Link href={'/search'} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {rating.map((rat, index) => (
             <div key={index} className="bg-white p-4 m-4 rounded-lg border-2 border-gray-400 flex flex-col hover:bg-black hover:text-white cursor-pointer">
               <div className="text-lg mb-2 font-semibold">{rat.ratings}</div>
             </div>
           ))}
-        </div>
+        </Link>
       </div>
     </div >
   )

@@ -22,7 +22,6 @@ export async function PATCH(request: Request) {
         const existingCartItemIndex = currentUser.cartItems.findIndex(item => item.id === id);
 
         if (existingCartItemIndex !== -1) {
-            // Product already exists in cart, update the quantity
             const updatedCartItems = [...currentUser.cartItems];
             updatedCartItems[existingCartItemIndex].quantity = quantity;
 
@@ -33,7 +32,6 @@ export async function PATCH(request: Request) {
 
             return NextResponse.json({ message: "CartItem quantity updated successfully" });
         } else {
-            // Product doesn't exist in cart, add a new cart item
             const newCartItem = { id, quantity };
             const updatedCartItems = [...currentUser.cartItems, newCartItem];
 

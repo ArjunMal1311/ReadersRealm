@@ -2,7 +2,6 @@ import React from 'react'
 import { getCurrentUser } from '../actions/getCurrentUser'
 import Link from 'next/link'
 import getBooks from '../actions/getBooks'
-import Card from '../components/Card'
 import MyBooks from './MyBooks'
 
 const page = async () => {

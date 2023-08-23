@@ -4,7 +4,7 @@ import prisma from "@/app/libs/prismadb";
 import { getCurrentUser } from "@/app/actions/getCurrentUser";
 
 interface Params {
-    bookId?: string;
+    reviewId?: string;
 }
 
 export async function DELETE(request: Request, { params }: { params: Params }) {
@@ -16,20 +16,21 @@ export async function DELETE(request: Request, { params }: { params: Params }) {
             return NextResponse.error();
         }
 
-        const { bookId } = params;
+        const { reviewId } = params;
 
-        if (!bookId || typeof bookId !== 'string') {
+        if (!reviewId || typeof reviewId !== 'string') {
             throw new Error('Invalid ID');
         }
 
-        const book = await prisma.book.deleteMany({
+        await prisma.review.delete({
             where: {
-                id: bookId,
+                id: reviewId,
                 userId: currentUser.id
             }
         });
 
-        return NextResponse.json(book);
+        return NextResponse.json({ success: true });
+
     } catch (error) {
         return NextResponse.error()
     }

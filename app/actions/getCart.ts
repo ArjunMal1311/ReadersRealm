@@ -7,7 +7,7 @@ export default async function getCart() {
         const user = await getCurrentUser();
 
         if (!user) {
-            return null;
+            return NextResponse.error()
         }
 
         const cart = await prisma.user.findUnique({
@@ -15,6 +15,10 @@ export default async function getCart() {
                 id: user.id
             }
         });
+
+        if (!cart) {
+            return NextResponse.error()
+        }
 
         const cartItemIds = cart.cartItems.map(item => item.id);
 
@@ -32,7 +36,7 @@ export default async function getCart() {
             if (associatedBook) {
                 return {
                     bookName: associatedBook,
-                    quantity: cartItem.quantity
+                    quantity: parseInt(cartItem.quantity, 10)
                 }
             }
         });

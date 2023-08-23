@@ -70,6 +70,6 @@ export async function GET(request: Request) {
         return NextResponse.json(safeListings);
 
     } catch (error: any) {
-        throw new Error(error);
+        return NextResponse.error();
     }
 }

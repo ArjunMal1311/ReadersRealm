@@ -1,6 +1,12 @@
 import React from 'react';
+import { SafeOrder, SafeUser } from './types';
 
-const OrderDetails = ({ order, user }: any) => {
+interface OrderProps {
+    order: SafeOrder;
+    user: SafeUser
+}
+
+const OrderDetails: React.FC<OrderProps> = ({ order, user }) => {
     return (
         <div className="bg-white shadow-md p-6 rounded-lg max-w-md mx-auto mt-8 border-gray-300 border-2">
             {user.id === order.userId ? <><h2 className="text-4xl font-bold mb-4">Order Details</h2>

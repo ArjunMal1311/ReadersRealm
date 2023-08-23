@@ -2,9 +2,13 @@
 import React from 'react'
 import Button from './Button'
 import { useRouter } from 'next/navigation';
+import { BookData } from './types';
 
+interface CartProps {
+    cartItems: BookData[];
+}
 
-const CartItems = ({ cartItems }: any) => {
+const CartItems: React.FC<CartProps> = ({ cartItems }) => {
     const router = useRouter()
 
     return (

@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
-import { SafeListing, SafeUser } from './types';
+import { AiOutlinePlus, AiOutlineMinus, AiOutlineDelete } from 'react-icons/ai';
+import { SafeListing, SafeReview, SafeUser } from './types';
 import { useRouter } from 'next/navigation';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -11,15 +11,25 @@ import { toast } from 'react-hot-toast';
 interface BookInterface {
     user: SafeUser | null;
     book: SafeListing;
-    review: any
+    review: SafeReview[] | null
 }
 
 const BookInformation: React.FC<BookInterface> = ({ user, book, review }) => {
+    const [reviews, setReviews] = useState(0);
+
+    useEffect(() => {
+        if (review) {
+            const ratingSum = review.reduce((accumulator: number, item: SafeReview) => accumulator + item.rating, 0);
+            const calculatedAverageRating = ratingSum / review.length;
+            setReviews(calculatedAverageRating);
+        }
+    }, []);
+
     const [isLoading, setIsLoading] = useState(false);
     const [selectedRating, setSelectedRating] = useState(0);
     const router = useRouter();
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<FieldValues>({
+    const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
         defaultValues: {
             comment: '',
             rating: 0,
@@ -83,8 +93,12 @@ const BookInformation: React.FC<BookInterface> = ({ user, book, review }) => {
 
                         <div className='rounded-lg px-2 py-1 border-2 border-black hover:bg-black hover:text-white'>{book.category}</div>
                     </div>
-                    <div className="text-md mb-4 mt-4 text-gray-700 sm:w-3/4 w-full">
-                        {book.description}
+                    <div className='text-md mb-4 mt-4 text-gray-700 sm:w-3/4 w-full'>
+                        <div className="text-md mb-4 mt-4 text-gray-700">
+                            {book.description}
+                        </div>
+
+                        <div className='text-2xl font-bold'>Rating: {reviews}</div>
                     </div>
                     <div className="text-2xl text-gray-900 mt-10 mb-6">
                         Price: <span className="font-extrabold text-4xl">₹ {book.price}</span>
@@ -116,12 +130,20 @@ const BookInformation: React.FC<BookInterface> = ({ user, book, review }) => {
                             Reviews
                         </div>
 
-                        {review.map((rev: any) => (
-                            <div className="flex-col mb-4 border-b-2 py-2" key={book.id}>
-                                <div className="font-medium">{rev.comment.substring(0, 100)}...</div>
-                                <div className="text-gray-500 mt-1">Rating: {rev.rating}</div>
+                        {review ? <>
+                            {review.map((rev: any) => (
+                                <div className="flex-col mb-4 border-b-2 py-2" key={book.id}>
+                                    <div className="font-medium">{rev.comment}</div>
+                                    <div className="text-gray-500 mt-1">Rating: {rev.rating}</div>
+                                </div>
+                            ))}
+                        </>
+                            :
+                            <div>
+                                <h1> No Reviews yet</h1>
                             </div>
-                        ))}
+                        }
+
 
                         <form onSubmit={handleSubmit(onSubmit)} className='w-full sm:w-1/2 border-2 border-gray-600 p-4 rounded-lg '>
                             <div className='font-bold my-1 text-xl'>Add Review</div>
@@ -140,9 +162,13 @@ const BookInformation: React.FC<BookInterface> = ({ user, book, review }) => {
                             </div>
 
                             <div className="mb-4">
-                                <label htmlFor="rating" className="block font-medium text-gray-700">
-                                    Rating
-                                </label>
+                                <div className='flex justify-between'>
+                                    <label htmlFor="rating" className="block font-medium text-gray-700">
+                                        Rating
+                                    </label>
+
+                                    <h4 className='text-gray-300'>(Only one review per ID)</h4>
+                                </div>
                                 <div className="flex items-center">
                                     {[1, 2, 3, 4, 5].map((star) => (
                                         <span

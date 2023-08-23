@@ -55,9 +55,9 @@ const Page = () => {
     };
 
     return (
-        <div className='flex m-4'>
-            <div className='w-[10vw]'>
-                <form onSubmit={handleSubmit} className='space-y-4 flex flex-col border-2'>
+        <div className='sm:flex m-4 flex-col'>
+            <div className='lg:w-[15vw] flex justify-center w-full items-center'>
+                <form onSubmit={handleSubmit} className='my-4 rounded-xl p-4 flex flex-col border-2'>
                     <input
                         type='text'
                         className='p-2 m-2 rounded-lg focus:outline-none'
@@ -91,8 +91,7 @@ const Page = () => {
                             </option>
                         ))}
                     </select>
-                    <div className='p-2 m-2 rounded-lg focus:outline-none'>
-                        <label >Price Range:</label>
+                    <div className='p-2 m-4 rounded-lg focus:outline-none'>
                         <Range
                             step={100}
                             min={0}
@@ -105,13 +104,13 @@ const Page = () => {
                                 </div>
                             )}
                             renderThumb={({ props, value }) => (
-                                <div {...props} className='h-6 w-6 bg-blue-500 rounded-full shadow-md cursor-pointer transform -translate-x-1/2 -translate-y-2'>
+                                <div {...props} className='h-8 w-8 bg-blue-500 rounded-full shadow-md cursor-pointer transform -translate-x-1/2 -translate-y-2'>
                                     <div className='text-white text-sm'>{value}</div>
                                 </div>
                             )}
                         />
                     </div>
-                    <button type="submit" className='flex justify-center items-center border-2  border-black m-4 rounded-lg'>
+                    <button type="submit" className='flex justify-center items-center border-2  border-gray-200 m-4 rounded-lg hover:bg-gray-200'>
                         <IoSearch className="text-gray-600 text-xl cursor-pointer" />
                         Search
                     </button>

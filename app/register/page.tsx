@@ -89,19 +89,6 @@ const page = () => {
                         <Button outline label='Submit' onClick={() => handleSubmit(onSubmit)} />
                     </form>
                     <hr />
-
-                    <div className='flex gap-4 mt-3'>
-                        <Button
-                            outline
-                            label="Google"
-                            onClick={() => signIn('google')}
-                        />
-                        <Button
-                            outline
-                            label="Github"
-                            onClick={() => signIn('github')}
-                        />
-                    </div>
                     <div className="text-neutral-500 text-center mt-4 font-light">
                         <p>Already have an account?
                             <Link href="login" className="text-dark-600 cursor-pointer hover:text-purple-900"> Login!</Link>

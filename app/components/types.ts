@@ -1,4 +1,7 @@
-import { Book, User } from "@prisma/client";
+import { Book, Order, Review, User } from "@prisma/client";
+
+export type SafeReview = Review
+export type SafeOrder = Order
 
 export type SafeUser = Omit<User, "createdAt" | "updatedAt" | "emailVerified"> & {
     createdAt: string;
@@ -8,4 +11,9 @@ export type SafeUser = Omit<User, "createdAt" | "updatedAt" | "emailVerified"> &
 
 export type SafeListing = Omit<Book, "createdAt"> & {
     createdAt: string;
+};
+
+export type BookData = {
+    bookName: SafeListing;
+    quantity: number;
 };
