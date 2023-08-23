@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Input from '../components/Input';
-import { signIn } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import Button from '../components/Button';

@@ -11,7 +11,7 @@ const page = async () => {
         <div className='ml-6 '>
             {user ? <>
                 <span className='text-4xl font-extrabold'>Hello, {user?.name}, Here are your orders!</span>
-                {data?.map((item: SafeOrder) => (
+                {data?.map((item: any) => (
                     <div key={item.id} className='flex mt-6'>
                         <Link href={`myorder/${item.id}`}>
                             <div className='border-2 border-black px-2 py-1 rounded-xl'>

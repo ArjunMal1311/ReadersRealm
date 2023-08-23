@@ -96,7 +96,7 @@ const PaymentForm = ({ cartItems }: any) => {
 };
 
 const PaymentPage = ({ cartItems }: any) => {
-    const stripePromise = loadStripe(process.env.STRIPE_KEY);
+    const stripePromise = loadStripe(process.env.STRIPE_KEY as string);
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">

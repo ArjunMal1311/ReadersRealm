@@ -15,7 +15,7 @@ export default async function getAllOrders() {
             }
         });
 
-        const safeOrders = orders.map((listing: any) => ({
+        const safeOrders = orders.map((listing) => ({
             ...listing,
             createdAt: listing.createdAt.toISOString(),
         }))

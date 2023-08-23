@@ -30,7 +30,7 @@ const OrderDetails: React.FC<OrderProps> = ({ order, user }) => {
                     <p><strong>Paid At:</strong> {new Date(order.paidAt).toLocaleString()}</p>
                 </div>
                 <div className="mb-4">
-                    <p><strong>Items Price:</strong> ${order.itemsPrice}</p>
+                    <p><strong>Items Price:</strong> ₹{order.itemsPrice}</p>
                     <p><strong>Order Status:</strong> {order.orderStatus}</p>
                 </div>
                 <div className="mb-4">

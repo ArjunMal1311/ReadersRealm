@@ -5,7 +5,7 @@ export default async function getAllBooks() {
     try {
         const books = await prisma.book.findMany({});
 
-        const safeBooks = books.map((listing: any) => ({
+        const safeBooks = books.map((listing) => ({
             ...listing,
             createdAt: listing.createdAt.toISOString(),
         }))

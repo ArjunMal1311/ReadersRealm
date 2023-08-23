@@ -1,10 +1,10 @@
-import Image from 'next/image'
 import { bookCategories, rating } from './components/ItemsList/CategoriesList'
 import { AuthorsList } from './components/ItemsList/AuthorsList'
 import { FaArrowDown, FaFacebook, FaInstagram, FaScroll, FaSnapchat } from 'react-icons/fa'
 import Link from "next/link"
 import getAllBooks from './actions/getAllBooks'
 import Card from './components/Card'
+import { SafeListing } from './components/types'
 
 export default async function Home() {
   const books = await getAllBooks()
@@ -38,7 +38,7 @@ export default async function Home() {
           <div className='mx-auto md:px-6 sm:px-2 mt-10'>
             <span className='text-2xl font-extrabold mb-4 ml-4'>TRENDING</span>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8 mt-4 m-2">
-              {books.map((book: any) => (
+              {books.map((book: SafeListing) => (
                 <div className='flex-col' key={book.id}>
                   <Card
                     data={book}

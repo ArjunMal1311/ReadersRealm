@@ -6,6 +6,7 @@ import Card from '../components/Card';
 import { GetServerSidePropsContext } from 'next';
 import { bookCategories } from '../components/ItemsList/CategoriesList';
 import { Range } from 'react-range';
+import { SafeListing } from '../components/types';
 
 const Page = () => {
     const [listing, setListing] = useState<[]>([]);
@@ -55,8 +56,8 @@ const Page = () => {
     };
 
     return (
-        <div className='sm:flex m-4 flex-col'>
-            <div className='lg:w-[15vw] flex justify-center w-full items-center'>
+        <div className='sm:flex m-4 flex-col md:flex-row '>
+            <div className='md:w-[15vw] flex justify-center w-full items-center'>
                 <form onSubmit={handleSubmit} className='my-4 rounded-xl p-4 flex flex-col border-2'>
                     <input
                         type='text'
@@ -125,7 +126,7 @@ const Page = () => {
                             Here are the results!
                         </h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-                            {listing.map((listing: any) => (
+                            {listing.map((listing: SafeListing) => (
                                 <Card key={listing.id} data={listing} />
                             ))}
                         </div>

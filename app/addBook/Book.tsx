@@ -42,7 +42,7 @@ const Book: React.FC<UserProps> = ({ user }) => {
     });
 
     const category = watch('category');
-    const imageSrc = watch('imageSrc');
+    const imageUrl = watch('imageUrl');
 
     const onBack = () => {
         setStep((value) => Math.max(value - 1, STEPS.CATEGORY));
@@ -140,7 +140,7 @@ const Book: React.FC<UserProps> = ({ user }) => {
                             {step === STEPS.IMAGES && (
                                 <div>
                                     <Heading title="Step 4: Add Pictures!" />
-                                    <ImageUpload onChange={(value) => setCustomValue('imageSrc', value)} value={imageSrc} />
+                                    <ImageUpload onChange={(value) => setCustomValue('imageUrl', value)} value={imageUrl} />
                                 </div>
                             )}
                             {step === STEPS.DESCRIPTION && (
